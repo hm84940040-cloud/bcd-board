@@ -13,9 +13,9 @@ jobs:
       - name: SSH를 통한 오라클 서버 접속 및 배포
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.ORACLE_HOST }}
-          username: ${{ secrets.ORACLE_USER }}
-          key: ${{ secrets.ORACLE_SSH_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
             # 1. 프로젝트 폴더로 이동 (본인의 실제 서버 폴더 경로로 꼭 수정하세요!)
