@@ -397,26 +397,35 @@ export default function App() {
                 const remaining = peak.target - peak.completed;
                 const remainStr = remaining > 0 ? `${remaining.toFixed(1)}` : `↑ +${Math.abs(remaining).toFixed(1)}`;
                 
-                const isActive = peak.status === '진행중'; 
+                let statusText = peak.status;
+                let statusColor = "bg-slate-100 text-slate-500";
+                
+                if (!statusText) {
+                  if (peak.target > 0 && peak.completed >= peak.target) {
+                    statusText = '성공';
+                  } else {
+                    statusText = '대기중';
+                  }
+                }
+                
+                if (statusText === '진행중') statusColor = "bg-blue-100 text-blue-700";
+                else if (statusText === '성공' || statusText === '달성') { statusText = '성공'; statusColor = "bg-green-100 text-green-700"; }
+                else if (statusText === '실패') statusColor = "bg-red-100 text-red-700";
+                else if (statusText === '대기중') statusColor = "bg-slate-100 text-slate-500";
+
+                const isActive = statusText === '진행중';
 
                 return (
                   <div key={idx} className={`bg-white rounded-xl p-5 transition-colors shadow-sm ${isActive ? 'border-blue-600 border ring-4 ring-blue-50 z-10 scale-105' : 'border-slate-100 border'}`}>
                     <div className="flex justify-between items-start mb-3">
                       <span className="text-[13px] font-bold text-slate-600">{peak.name}</span>
-                      {isRateCalculable && rateValue >= 100 && (
-                        <div className="w-4 h-4 rounded-full bg-blue-50 flex items-center justify-center">
-                          <Check className="text-blue-500" strokeWidth={3} size={10} />
-                        </div>
-                      )}
+                      <span className={`text-[10px] font-black px-2 py-1 rounded-md ${statusColor}`}>
+                        {statusText}
+                      </span>
                     </div>
                     
                     <div className="flex items-center gap-2 mb-6">
                       <div className="text-2xl font-black tracking-tight text-slate-900">{rateStr}</div>
-                      {peak.status && (
-                        <span className="text-[10px] font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full whitespace-nowrap">
-                          {peak.status}
-                        </span>
-                      )}
                     </div>
                     
                     <div className="flex justify-between items-center mb-4">
