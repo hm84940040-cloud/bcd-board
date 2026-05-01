@@ -1,0 +1,6 @@
+{
+  "name": "BCD+ 배달 운영 실시간 대시보드",
+  "description": "쿠팡이츠 스타일의 고해상도 실시간 배달 운영 관리 대시보드. 가용 인력, 주문 현황 및 피크 타임 관리를 지원합니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

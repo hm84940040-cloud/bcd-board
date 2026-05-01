@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "BCD+ Dashboard Sync",
+  "version": "1.1",
+  "description": "쿠팡이츠 대시보드 데이터를 BCD+ 대시보드 서버로 동기화합니다.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.coupangeats.com/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://partner.coupangeats.com/*", "https://ed.coupangeats.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
